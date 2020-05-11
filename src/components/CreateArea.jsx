@@ -1,32 +1,49 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import Note from "./Note";
 
 function CreateArea(props) {
-    const [noteTitle, setNoteTitle] = useState("");
-    const [noteContent, setNoteContent] = useState("");
-    
-    function changeTitle(event){
-        setNoteTitle(event.target.value);
+    const [note, setNote] = useState({
+        title: "",
+        content: ""
+    });
+
+    function changeNote(event) {
+        const value = event.target.value;
+        const name = event.target.name;
+        
+        if (name === "title") {
+            setNote(prev => {
+                return {
+                    title: value,
+                    content: prev.content
+                }
+            })
+        } else if (name === "content") {
+            setNote(prev => {
+                return {
+                    title: prev.title,
+                    content: value
+                }
+            })
+
+        }
     }
 
-    function changeContent(event){
-        setNoteContent(event.target.value);
-    }
-  
     return (
         <div>
-        <form>
-            <input name="title" placeholder="Title" onChange={changeTitle} value={noteTitle} />
-            <textarea name="content" placeholder="Take a note..." rows="3" onChange ={changeContent} value={noteContent} />
-            <button onClick = {event => {
-                props.addNote([noteTitle,noteContent]);
-                setNoteTitle("");
-                setNoteContent("");
+            <form>
+                <input name="title" placeholder="Title" onChange={changeNote} value={note.title} />
+                <textarea name="content" placeholder="Take a note..." rows="3" onChange={changeNote} value={note.content} />
+                <button onClick={event => {
+                    props.addNote(note);
+                    setNote({
+                        title: "",
+                        content: ""
+                    })
 
-                event.preventDefault();
-                
-            }}>Add</button>
-        </form>
+                    event.preventDefault();
+                }}>Add</button>
+            </form>
         </div>
     );
 }
