@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import Footer from "./Footer";
 import Header from "./Header";
 import Note from "./Note";
@@ -8,11 +8,19 @@ import CreateArea from "./CreateArea";
 // console.log(notes)
 
 function App(){
+    const [noteTitle, setNoteTitle] = useState("");
+    const [noteContent, setNoteContent] = useState("");
+
+    function addNote(note){
+        setNoteTitle(note[0]);
+        setNoteContent(note[1]);
+    }
+    
     return (
         <div>
             <Header />
-            <CreateArea />
-            <Note key={1} title="Note title" content="Note content" />
+            <CreateArea addNote={addNote}/>
+            <Note title={noteTitle} content={noteContent} />
             <Footer />
         </div>
     );
