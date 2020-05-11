@@ -45,8 +45,9 @@ footer p {
   float: left;
 }
 .note h1 {
-  font-size: 1.1em;
+  font-size: 1.6em;
   margin-bottom: 6px;
+  font-weight: bolder;
 }
 .note p {
   font-size: 1.1em;
@@ -65,6 +66,7 @@ footer p {
   height: 36px;
   cursor: pointer;
   outline: none;
+  font-weight: bolder;
 }
 
 form {
@@ -76,7 +78,17 @@ form {
   border-radius: 7px;
   box-shadow: 0 1px 5px rgb(138, 137, 137);
 }
-form input,
+
+form input {
+  width: 100%;
+  border: none;
+  padding: 4px;
+  outline: none;
+  font-size: 1.7em;
+  font-family: inherit;
+  resize: none;
+}
+
 form textarea {
   width: 100%;
   border: none;
